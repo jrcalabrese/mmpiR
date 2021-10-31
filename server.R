@@ -61,7 +61,7 @@ server <- function(input, output) {
         # clinical labels
         clinical_labels <- c("Hs", "D", "Hy", 
                              "Pd", "Mf", "Pa", 
-                             "Pt", "Sc", "Ma")
+                             "Pt", "Sc", "Ma", "Si")
         
         # make a ggplot
         clinical_df %>%
@@ -85,6 +85,8 @@ server <- function(input, output) {
                                        input$fam, input$wrk, input$trt)) %>%
             tibble::rownames_to_column(var = "scale") %>%
             rename(scale_score = 2)
+        
+        content_df$scale <- factor(content_df$scale, levels = content_df$scale)
         
         # order scale variable
         content_labels = c("ANX", "FRS", "OBS", 

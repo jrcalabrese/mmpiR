@@ -187,7 +187,7 @@ ui <- navbarPage("mmpiR by @jrosecalabrese", theme = shinytheme("flatly"),
                                   
                                   # Type in TRT
                                   numericInput(inputId = "trt", "TRT", 50,
-                                               min = 30, max = 120),
+                                               min = 30, max = 120)
                               ),
                               
                               # Show a plot of the generated distribution
