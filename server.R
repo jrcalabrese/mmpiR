@@ -19,8 +19,8 @@ source("ui.R")
 server <- function(input, output) {
     
     output$validity_plot <- renderPlot({
-        # out validity in a dataframe
-        
+      
+        # put validity in a dataframe
         validity_df <- data.frame(rbind(input$vrin, input$trin, input$f,
                                         input$fb, input$fp, input$l,
                                         input$k, input$s)) %>%
@@ -32,13 +32,16 @@ server <- function(input, output) {
         
         # make a ggplot
         validity_df %>%
-            ggplot(aes(x=scale, y=scale_score, group=1)) + # Group=1 connects points
-            geom_line() + 
-            geom_point(size=3) +
-            ylim(30, 120) +
-            scale_x_discrete(labels = validity_labels) +
-            xlab("Validity Scale") + ylab("T Score") +
-          ggtitle("MMPI-2 Validity Scales")
+          ggplot(aes(x=scale, y=as.numeric(scale_score), group=1)) + # Group=1 connects points
+          theme_bw() +
+          geom_line() + 
+          geom_point(size=2) +
+          geom_hline(yintercept=50) +
+          geom_hline(yintercept=65) +
+          scale_y_continuous(sec.axis = dup_axis(), breaks = (seq(30, 120, by = 10)), limits = c(30,120)) +
+          scale_x_discrete(labels = validity_labels) +
+          xlab("") + ylab("") +
+          ggtitle("MMPI-2 VALIDITY PATTERN") + theme(plot.title = element_text(hjust = 0.5))
         
     })
     
@@ -50,7 +53,8 @@ server <- function(input, output) {
     )
     
     output$clinical_plot <- renderPlot({
-        # put the scale numbers into a dataframe
+      
+        # put clinical in a dataframe
         clinical_df <- data.frame(rbind(input$scale1, input$scale2, input$scale3,
                                         input$scale4, input$scale5, input$scale6,
                                         input$scale7, input$scale8, input$scale9,
@@ -72,14 +76,17 @@ server <- function(input, output) {
         
         # make a ggplot
         clinical_df %>%
-            ggplot(aes(x=scale, y=scale_score, group=1)) + # Group=1 connects points
-            geom_line() + 
-            geom_point(size=3) +
-            ylim(30, 120) +
-            scale_x_discrete(labels = clinical_labels) +
-            xlab("Clinical Scale") + ylab("T Score") +
-          ggtitle("MMPI-2 Clinical Scales")
-        
+          ggplot(aes(x=scale, y=scale_score, group=1)) + # Group=1 connects points
+          theme_bw() +
+          geom_line() + 
+          geom_point(size=2) +
+          geom_hline(yintercept=50) +
+          geom_hline(yintercept=65) +
+          scale_x_discrete(labels = clinical_labels) +
+          xlab("") + ylab("") +
+          scale_y_continuous(sec.axis = dup_axis(), breaks = (seq(30, 120, by = 10)), limits = c(30,120)) +
+          ggtitle("MMPI-2 CLINICAL SCALES PROFILE") + theme(plot.title = element_text(hjust = 0.5))
+
     })
     
     output$clinical_down <- downloadHandler(
@@ -90,8 +97,8 @@ server <- function(input, output) {
     )
     
     output$content_plot <- renderPlot({
-        # out content in a dataframe
-        
+      
+        # put content in a dataframe
         content_df <- data.frame(rbind(input$anx, input$frs, input$obs,
                                        input$dep, input$hea, input$biz,
                                        input$ang, input$cyn, input$asp, 
@@ -111,13 +118,16 @@ server <- function(input, output) {
         
         # make a ggplot
         content_df %>%
-            ggplot(aes(x=scale, y=scale_score, group=1)) + # Group=1 connects points
-            geom_line() + 
-            geom_point(size=3) +
-            ylim(30, 120) +
-            scale_x_discrete(labels = content_labels) + 
-            xlab("Content Scale") + ylab("T Score") +
-          ggtitle("MMPI-2 Content Scales")
+          ggplot(aes(x=scale, y=scale_score, group=1)) + # Group=1 connects points
+          geom_line() + 
+          theme_bw() +
+          geom_point(size=2) +
+          geom_hline(yintercept=50) +
+          geom_hline(yintercept=65) +
+          scale_x_discrete(labels = content_labels) + 
+          xlab("") + ylab("") +
+          scale_y_continuous(sec.axis = dup_axis(), breaks = (seq(30, 120, by = 10)), limits = c(30,120)) +
+          ggtitle("MMPI-2 CONTENT SCALES PROFILE") + theme(plot.title = element_text(hjust = 0.5))
     })
     
     output$content_down <- downloadHandler(
