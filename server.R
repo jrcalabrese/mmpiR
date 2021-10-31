@@ -22,7 +22,7 @@ server <- function(input, output) {
       
         # put validity in a dataframe
         validity_df <- data.frame(rbind(input$vrin, input$trin, input$f,
-                                        input$fb, input$fp, input$l,
+                                        input$fb, input$fp, input$l, input$fbs,
                                         input$k, input$s)) %>%
             tibble::rownames_to_column(var = "scale") %>%
             rename(scale_score = 2)

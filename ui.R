@@ -43,6 +43,10 @@ ui <- navbarPage("mmpiR by @jrosecalabrese", theme = shinytheme("flatly"),
                                   numericInput(inputId = "fp", "Fp", 55,
                                                min = 30, max = 120),
                                   
+                                  # Type in FBS
+                                  numericInput(inputId = "fbs", "FBS", 55,
+                                               min = 30, max = 120),
+                                  
                                   # Type in L
                                   numericInput(inputId = "l", "L", 55,
                                                min = 30, max = 120),
