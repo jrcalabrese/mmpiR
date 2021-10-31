@@ -42,6 +42,13 @@ server <- function(input, output) {
         
     })
     
+    output$valid_down <- downloadHandler(
+      filename = "valid_plot.png",
+      content = function(file){
+        ggsave(file, device = "png", width=7, height=3.5)
+      }
+    )
+    
     output$clinical_plot <- renderPlot({
         # put the scale numbers into a dataframe
         clinical_df <- data.frame(rbind(input$scale1, input$scale2, input$scale3,
@@ -75,6 +82,13 @@ server <- function(input, output) {
         
     })
     
+    output$clinical_down <- downloadHandler(
+      filename = "clinical_plot.png",
+      content = function(file){
+        ggsave(file, device = "png", width=7, height=3.5)
+      }
+    )
+    
     output$content_plot <- renderPlot({
         # out content in a dataframe
         
@@ -105,20 +119,6 @@ server <- function(input, output) {
             xlab("Content Scale") + ylab("T Score") +
           ggtitle("MMPI-2 Content Scales")
     })
-    
-    output$valid_down <- downloadHandler(
-        filename = "valid_plot.png",
-        content = function(file){
-            ggsave(file, device = "png", width=7, height=3.5)
-        }
-    )
-    
-    output$clinical_down <- downloadHandler(
-        filename = "clinical_plot.png",
-        content = function(file){
-            ggsave(file, device = "png", width=7, height=3.5)
-        }
-    )
     
     output$content_down <- downloadHandler(
         filename = "content_plot.png",
