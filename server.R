@@ -22,13 +22,13 @@ server <- function(input, output) {
       
         # put validity in a dataframe
         validity_df <- data.frame(rbind(input$vrin, input$trin, input$f,
-                                        input$fb, input$fp, input$l, input$fbs,
+                                        input$fb, input$fp, input$fbs, input$l, 
                                         input$k, input$s)) %>%
             tibble::rownames_to_column(var = "scale") %>%
             rename(scale_score = 2)
         
         # order scale variable
-        validity_labels = c("VRIN", "TRIN", "F", "Fb", "Fp", "L", "K", "S")
+        validity_labels = c("VRIN", "TRIN", "F", "Fb", "Fp", "FBS", "L", "K", "S")
         
         # make a ggplot
         validity_df %>%
