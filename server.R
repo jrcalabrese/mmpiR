@@ -171,7 +171,7 @@ server <- function(input, output) {
         ggtitle("MMPI-2 SUPPLEMENTARY SCALES PROFILE") + theme(plot.title = element_text(hjust = 0.5))
     })
     
-    output$content_down <- downloadHandler(
+    output$supp_down <- downloadHandler(
       filename = "supp_plot.png",
       content = function(file){
         ggsave(file, device = "png", width=7, height=3.5)
