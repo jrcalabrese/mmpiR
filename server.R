@@ -137,6 +137,47 @@ server <- function(input, output) {
         }
     )
     
+    output$supp_plot <- renderPlot({
+      
+      # put content in a dataframe
+      supp_df <- data.frame(rbind(input$a, input$r, input$es,
+                                     input$do, input$re, input$mt,
+                                     input$pk, input$mds, input$ho, 
+                                     input$oh, input$macr, input$aas, 
+                                     input$aps, input$gm, input$gf)) %>%
+        tibble::rownames_to_column(var = "scale") %>%
+        rename(scale_score = 2)
+      
+      supp_df$scale <- factor(supp_df$scale, levels = supp_df$scale)
+      
+      # order scale variable
+      supp_labels = c("A", "R", "Es", 
+                         "Do", "Re", "Mt",
+                         "PK", "MDS", "Ho", 
+                         "O-H", "MAC-R", "AAS",
+                         "APS", "GM", "GF")
+      
+      # make a ggplot
+      supp_df %>%
+        ggplot(aes(x=scale, y=scale_score, group=1)) + # Group=1 connects points
+        geom_line() + 
+        theme_bw() +
+        geom_point(size=2) +
+        geom_hline(yintercept=50) +
+        geom_hline(yintercept=65) +
+        scale_x_discrete(labels = supp_labels) + 
+        xlab("") + ylab("") +
+        scale_y_continuous(sec.axis = dup_axis(), breaks = (seq(30, 120, by = 10)), limits = c(30,120)) +
+        ggtitle("MMPI-2 SUPPLEMENTARY SCALES PROFILE") + theme(plot.title = element_text(hjust = 0.5))
+    })
+    
+    output$content_down <- downloadHandler(
+      filename = "supp_plot.png",
+      content = function(file){
+        ggsave(file, device = "png", width=7, height=3.5)
+      }
+    )
+    
 }
 
 # DO NOT ACTUALLY INLCLUDE THESE LINES IN THE FINAL PRODUCT!!!!

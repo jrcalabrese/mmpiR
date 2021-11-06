@@ -201,4 +201,82 @@ ui <- navbarPage("mmpiR by @jrosecalabrese", theme = shinytheme("flatly"),
                               )
                               
                           )),
+                 
+                 tabPanel("Supplementary Scales",
+                          
+                          # Application title
+                          titlePanel("MMPI-2 Supplementary Scales"),
+                          
+                          # Sidebar with numeric input boxes
+                          sidebarLayout(
+                            sidebarPanel(
+                              
+                              # Type in A
+                              numericInput(inputId = "a", "A", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in R
+                              numericInput(inputId = "r", "R", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in Es
+                              numericInput(inputId = "es", "ES", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in Do
+                              numericInput(inputId = "do", "Do", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in Re
+                              numericInput(inputId = "re", "Re", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in Mt
+                              numericInput(inputId = "mt", "Mt", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in PK
+                              numericInput(inputId = "pk", "PK", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in MDS
+                              numericInput(inputId = "mds", "MDS", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in Ho
+                              numericInput(inputId = "ho", "HO", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in O-H
+                              numericInput(inputId = "oh", "O-H", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in MAC-R
+                              numericInput(inputId = "macr", "MAC-R", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in AAS
+                              numericInput(inputId = "aas", "AAS", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in APS
+                              numericInput(inputId = "aps", "APS", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in GM
+                              numericInput(inputId = "gm", "GM", 55,
+                                           min = 30, max = 120),
+                              
+                              # Type in GF
+                              numericInput(inputId = "gf", "GF", 55,
+                                           min = 30, max = 120)
+                            ),
+                            
+                            # Show the lineplot
+                            mainPanel(
+                              plotOutput(outputId = "supp_plot"),
+                              downloadButton(outputId = "supp_down", label = "Download the plot"),
+                            )
+                            
+                          )),
                  )
