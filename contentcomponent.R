@@ -29,8 +29,6 @@ contentcomponent_ui <-
                             min = 30, max = 120),
                numericInput(inputId = "dep4", "DEP4", 55,
                             min = 30, max = 120),
-               numericInput(inputId = "dep5", "DEP5", 55,
-                            min = 30, max = 120),
                
                # Type in Hysteria
                numericInput(inputId = "hea1", "HEA1", 55,
